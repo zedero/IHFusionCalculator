@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "buildProd": "ng build --prod --base-href 'https://zedero.github.io/IHFusionCalculator'",
+    "buildProd": "ng build --prod --base-href=/IHFusionCalculator/",
     "push": "npx angular-cli-ghpages --dir=dist/IHFusionCalculator",
     "publish": "npm run buildProd && npm run push",
     "test": "ng test",
