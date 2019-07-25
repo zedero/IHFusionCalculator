@@ -1,5 +1,6 @@
 // import {Settings} from './interfaces';
 import * as FOREST from './forestHeroes';
+import * as DARK from './darkHeroes';
 
 /**
  * Level 5:  4 copy(4*) + 4 Other(3*)  4 Fodder(4*)
@@ -84,5 +85,5 @@ export const FOREST_HEROES = FOREST.FOREST_HEROES;
 export const FORTRESS_HEROES = {};
 export const SHADOW_HEROES = {};
 export const ABYSS_HEROES = {};
-export const DARK_HEROES = {};
+export const DARK_HEROES = DARK.DARK_HEROES;
 export const LIGHT_HEROES = {};

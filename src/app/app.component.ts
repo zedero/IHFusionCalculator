@@ -9,6 +9,7 @@ import * as Constants from './globals/Constants';
 export class AppComponent {
 
   public FOREST = Constants.FOREST_HEROES;
+  public DARK = Constants.DARK_HEROES;
 
   constructor() {
 
