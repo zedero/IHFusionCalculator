@@ -1,10 +1,12 @@
 {
-  "name": "idle-calc",
+  "name": "ihfusioncalculator",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildProd": "ng build --prod --base-href 'https://zedero.github.io/IHFusionCalculator'",
+    "push": "npx angular-cli-ghpages --dir=dist/IHFusionCalculator",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
