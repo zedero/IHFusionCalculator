@@ -1,0 +1,16 @@
+<div>Log</div>
+&nbsp;
+<div></div>
+<!--{{ ownedService.usedHeroes | json}}-->
+Copies:
+<div *ngFor="let star of copies ">
+  <div *ngFor="let copy of getCopiesFromStarGroup(star[1]) ">
+    {{copy[1]}} x {{getNameFromId(copy[0])}} ({{star[0]}}*)
+  </div>
+</div>
+&nbsp;
+<div class=""></div>
+Fodder:
+<div *ngFor="let fod of fodder ">
+  {{fod[1]}} x {{fod[0]}}*
+</div>

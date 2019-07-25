@@ -1,0 +1,15 @@
+label {
+  display: inline-block;
+  min-width: 120px;
+  max-width: 120px;
+}
+
+input {
+  display: inline-block;
+  min-width: 100px;
+  max-width: 100px;
+
+  &:disabled {
+    opacity: 0;
+  }
+}

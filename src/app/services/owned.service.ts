@@ -1,0 +1,232 @@
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Helper } from '../utilities/helper';
+
+declare const window: any;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OwnedService implements OnDestroy {
+
+  private saveNameSpace = 'IHCalc';
+  private saveName = this.saveNameSpace + 'SaveData';
+  private saveBagName = this.saveNameSpace + 'Bagdata';
+  private saveRosterName = this.saveNameSpace + 'Rosterdata';
+
+  private manualSaveNameSpace = 'IHCalcManual';
+  private manualSaveName = this.manualSaveNameSpace + 'SaveData';
+  private manualSaveBagName = this.manualSaveNameSpace + 'Bagdata';
+  private manualSaveRosterName = this.manualSaveNameSpace + 'Rosterdata';
+
+  public ownedHeroes = {};
+  public tempOwnedHeroes = {};
+  public ownedHeroesBag = {};
+  public ownedHeroesRoster = {};
+
+  public ownedOffset;
+
+  public changed: Subject<any>;
+  public helper = new Helper();
+
+  public usedHeroes;
+
+  constructor() {
+    this.changed = new Subject();
+    this.resetOwnedOffset();
+    this.load();
+
+    window.Game = this;
+  }
+
+  public resetOwnedOffset() {
+    this.ownedOffset = {
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+      10: 0,
+      11: 0,
+      12: 0,
+      13: 0,
+    };
+
+    this.usedHeroes = {};
+  }
+
+  public setHeroAmount(id, amount, stars) {
+    if (!this.ownedHeroes[stars]) {
+      this.ownedHeroes[stars] = {};
+    }
+    this.ownedHeroes[stars][id] = amount;
+
+    this.save();
+  }
+
+  public getTempHeroAmount(id, stars) {
+    return this.getAmountOfObject(id, stars, this.tempOwnedHeroes);
+  }
+
+  public getHeroAmount(id, stars) {
+    return this.getAmountOfObject(id, stars, this.ownedHeroes);
+  }
+
+  public getHeroBagAmount(id, stars) {
+    return this.getAmountOfObject(id, stars, this.ownedHeroesBag);
+  }
+
+  public getHeroRosterAmount(id, stars) {
+    return this.getAmountOfObject(id, stars, this.ownedHeroesRoster);
+  }
+
+  public getAmountOfObject(id, stars, objectData) {
+    if (!objectData[stars] || !objectData[stars][id]) {
+      return 0;
+    }
+    return objectData[stars][id];
+  }
+
+  public setTempHeroAmount(id, amount, stars) {
+    if (!this.tempOwnedHeroes[stars]) {
+      this.tempOwnedHeroes[stars] = {};
+    }
+    this.tempOwnedHeroes[stars][id] = amount;
+    this.changed.next();
+  }
+
+  public setHeroBagAmount(id, amount, stars) {
+    if (!this.ownedHeroesBag[stars]) {
+      this.ownedHeroesBag[stars] = {};
+    }
+    this.ownedHeroesBag[stars][id] = amount;
+    this.save();
+  }
+
+  public setHeroRosterAmount(id, amount, stars) {
+    if (!this.ownedHeroesRoster[stars]) {
+      this.ownedHeroesRoster[stars] = {};
+    }
+    this.ownedHeroesRoster[stars][id] = amount;
+    this.save();
+  }
+
+
+  public save() {
+    localStorage.setItem(this.saveName, JSON.stringify(this.ownedHeroes));
+    localStorage.setItem(this.saveBagName, JSON.stringify(this.ownedHeroesBag));
+    localStorage.setItem(this.saveRosterName, JSON.stringify(this.ownedHeroesRoster));
+    this.tempOwnedHeroes = this.helper.deepCopyObject(this.ownedHeroes);
+    this.changed.next();
+  }
+
+  public manualSave() {
+    localStorage.setItem(this.manualSaveName, JSON.stringify(this.ownedHeroes));
+    localStorage.setItem(this.manualSaveBagName, JSON.stringify(this.ownedHeroesBag));
+    localStorage.setItem(this.manualSaveRosterName, JSON.stringify(this.ownedHeroesRoster));
+  }
+
+  public load() {
+    this.ownedHeroes = JSON.parse(localStorage.getItem(this.saveName));
+    if (!this.ownedHeroes) {
+      this.ownedHeroes = {};
+    }
+
+    this.ownedHeroesBag = JSON.parse(localStorage.getItem(this.saveBagName));
+    if (!this.ownedHeroesBag) {
+      this.ownedHeroesBag = {};
+    }
+
+    this.ownedHeroesRoster = JSON.parse(localStorage.getItem(this.saveRosterName));
+    if (!this.ownedHeroesRoster) {
+      this.ownedHeroesRoster = {};
+    }
+
+    this.tempOwnedHeroes = this.helper.deepCopyObject(this.ownedHeroes);
+    this.resetOwnedOffset();
+    this.changed.next();
+  }
+
+  public manualLoad() {
+    this.ownedHeroes = JSON.parse(localStorage.getItem(this.manualSaveName));
+    if (!this.ownedHeroes) {
+      this.ownedHeroes = {};
+    }
+
+    this.ownedHeroesBag = JSON.parse(localStorage.getItem(this.manualSaveBagName));
+    if (!this.ownedHeroesBag) {
+      this.ownedHeroesBag = {};
+    }
+
+    this.ownedHeroesRoster = JSON.parse(localStorage.getItem(this.manualSaveRosterName));
+    if (!this.ownedHeroesRoster) {
+      this.ownedHeroesRoster = {};
+    }
+
+    this.tempOwnedHeroes = this.helper.deepCopyObject(this.ownedHeroes);
+    this.resetOwnedOffset();
+    this.changed.next();
+  }
+
+  public calculateTotalFodder(stars) {
+    if (!stars) {
+      return 0;
+    }
+    if (!this.tempOwnedHeroes || !this.tempOwnedHeroes[stars]) {
+      return 0;
+    }
+
+    return Object.values(this.tempOwnedHeroes[stars]).reduce((a: number, b: number) => a + b, 0);
+  }
+
+  public log(requirement, fodder) {
+    // console.log(requirement, fodder);
+
+    if (!this.usedHeroes.fodder) {
+      this.usedHeroes.fodder = fodder;
+    } else {
+      Object.entries(fodder).forEach((hero) => {
+        const stars = hero[0];
+        const amount = hero[1];
+        if (this.usedHeroes.fodder[stars]) {
+          this.usedHeroes.fodder[stars] += amount;
+        } else {
+          this.usedHeroes.fodder[stars] = amount;
+        }
+      });
+    }
+
+
+    if (!this.usedHeroes.copies) {
+      this.usedHeroes.copies = requirement;
+    } else {
+      Object.entries(requirement).forEach((reqGroup) => {
+        const stars = reqGroup[0];
+        const heroes = reqGroup[1];
+        if (!this.usedHeroes.copies[stars]) {
+          this.usedHeroes.copies[stars] = {};
+        }
+        Object.entries(heroes).forEach((hero) => {
+          const id = hero[0];
+          const amount = hero[1];
+          if (this.usedHeroes.copies[stars][id]) {
+            this.usedHeroes.copies[stars][id] += amount;
+          } else {
+            this.usedHeroes.copies[stars][id] = amount;
+          }
+        });
+      });
+    }
+
+
+    console.log(this.usedHeroes);
+
+  }
+
+  ngOnDestroy() {
+    this.changed.unsubscribe();
+  }
+
+}

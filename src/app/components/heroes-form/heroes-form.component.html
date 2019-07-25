@@ -1,0 +1,35 @@
+<div>
+  <button (click)="manualSave()">Manual Save</button>
+  <button (click)="manualLoad()">Manual Load</button>
+</div>
+&nbsp;
+<div></div>
+
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-7">
+    <div *ngFor="let star of stars">
+          <app-list-header></app-list-header>
+          {{star}}* ({{ownedService.calculateTotalFodder(star) + ownedService.ownedOffset[star] }})
+          <div *ngFor="let hero of heroes[star]">
+            <app-hero-input [heroData]="hero" [level]="star"></app-hero-input>
+          </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-5">
+    <div>
+      Fusion simulation
+    </div>
+
+    <div *ngFor="let star of fusionStars">
+      &nbsp;
+      <div>{{star}}*</div>
+      <div *ngFor="let hero of heroes[star]">
+        <app-hero-can-create *ngIf="canCreate(hero)" [heroData]="hero" [level]="star"></app-hero-can-create>
+      </div>
+    </div>
+    &nbsp;
+    <app-log></app-log>
+  </div>
+</div>
