@@ -19,6 +19,9 @@ export class LogComponent implements OnInit {
     this.ownedService.changed.subscribe(() => {
       setTimeout(() => {
         if (!this.ownedService.usedHeroes || !this.ownedService.usedHeroes.fodder) {
+          this.fodder = {};
+          this.copies = {};
+          this.fused = [];
           return;
         }
         this.fodder = Object.entries(this.ownedService.usedHeroes.fodder);
