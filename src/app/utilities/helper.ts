@@ -1,12 +1,12 @@
 /**
  * @internal
  * A helper class with many utilities.
- *  */
+ */
 export class Helper {
 
   /**
-  * Returns a deep copied object.
-  *  */
+   * Returns a deep copied object.
+   */
   public deepCopyObject(aObject: object): object {
     const clone = {};
     const keys = Object.keys(aObject);
@@ -23,8 +23,8 @@ export class Helper {
   }
 
   /**
-  * Returns a deep merge object from two objects.
-  *  */
+   * Returns a deep merge object from two objects.
+   */
   public deepMergeObject(aTarget: object, aSource: object): object {
     // create a output object from target with no reference.
     const output = Object.assign({}, aTarget);
@@ -50,8 +50,8 @@ export class Helper {
   }
 
   /**
-  * Returns a object where the key and value is swapped.
-  *  */
+   * Returns a object where the key and value is swapped.
+   */
   public reverseObjectKeyVal(obj: object): object {
     const ret = {};
     // Loop through each key of an object.
@@ -65,8 +65,8 @@ export class Helper {
   }
 
   /**
-  * Checks if item is an object
-  *  */
+   * Checks if item is an object
+   */
   private isObject(aItem: any): boolean {
     return (aItem && typeof aItem === 'object' && !Array.isArray(aItem));
   }
@@ -75,7 +75,7 @@ export class Helper {
    * Checks if two arrays are equal. Does not check nested arrays!
    *
    * You can check two arrays non strict. When doing this the array gets sorted and then compared.
-   *  */
+   */
   public isEqualArray(aTarget: Array<any>, aSource: Array<any>, aStrict: boolean = true) {
     // If either is undefined, return true if both are undefined, else return false.
     if (!aTarget || !aSource) {

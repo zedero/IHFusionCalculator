@@ -223,9 +223,6 @@ export class OwnedService implements OnDestroy {
       });
     }
 
-
-    // console.log(this.usedHeroes);
-
   }
 
   ngOnDestroy() {
