@@ -11,6 +11,7 @@ export class LogComponent implements OnInit {
 
   public fodder;
   public copies;
+  public fused = [];
 
   constructor(private ownedService: OwnedService) { }
 
@@ -22,6 +23,7 @@ export class LogComponent implements OnInit {
         }
         this.fodder = Object.entries(this.ownedService.usedHeroes.fodder);
         this.copies = Object.entries(this.ownedService.usedHeroes.copies);
+        this.fused = this.ownedService.usedHeroes.fused;
       }, 1);
     });
   }

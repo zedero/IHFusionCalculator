@@ -12,6 +12,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
   public hero;
   public stars;
+  public isFodder = false;
   public fusable = 0;
   public owned = 0;
 
@@ -25,6 +26,11 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
   @Input()
   set level(data) {
     this.stars = data;
+  }
+
+  @Input()
+  set heroes(data) {
+    this.isFodder = !data[6].find(x => x.id === this.hero.id);
   }
 
   constructor(private ownedService: OwnedService) { }
@@ -69,8 +75,12 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
     // if (this.hero.id === 'vesa') {
     //   console.log(list);
     // }
+    // if (this.stars === 9 && this.hero.id === 'thale') {
+    //   console.log(this.hero.require);
+    //   console.log(list);
+    // }
     this.fusable = Math.min(...list);
-    this.owned = this.ownedService.getHeroAmount(this.hero.id, this.stars);
+    this.owned = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
   }
 
   public fuseHero = () => {
@@ -97,7 +107,17 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
     const currentHeroAmount = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
     this.ownedService.setTempHeroAmount(this.hero.id, currentHeroAmount + 1 , this.stars);
-    this.ownedService.log(this.helper.deepCopyObject(this.hero.require), this.helper.deepCopyObject(Constants.FODDER_REQUIREMENT[this.stars]));
+
+    const fused = {
+      name: this.hero.name,
+      stars: this.stars
+    };
+
+    this.ownedService.log(
+      this.helper.deepCopyObject(this.hero.require),
+      this.helper.deepCopyObject(Constants.FODDER_REQUIREMENT[this.stars]),
+      fused
+    );
   }
 
 

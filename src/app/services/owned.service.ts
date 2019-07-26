@@ -181,8 +181,11 @@ export class OwnedService implements OnDestroy {
     return Object.values(this.tempOwnedHeroes[stars]).reduce((a: number, b: number) => a + b, 0);
   }
 
-  public log(requirement, fodder) {
-    // console.log(requirement, fodder);
+  public log(requirement, fodder, fused) {
+    if (!this.usedHeroes.fused) {
+      this.usedHeroes.fused = [];
+    }
+    this.usedHeroes.fused.push(fused);
 
     if (!this.usedHeroes.fodder) {
       this.usedHeroes.fodder = fodder;
@@ -221,7 +224,7 @@ export class OwnedService implements OnDestroy {
     }
 
 
-    console.log(this.usedHeroes);
+    // console.log(this.usedHeroes);
 
   }
 

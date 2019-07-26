@@ -26,7 +26,7 @@
       &nbsp;
       <div>{{star}}*</div>
       <div *ngFor="let hero of heroes[star]">
-        <app-hero-can-create *ngIf="canCreate(hero)" [heroData]="hero" [level]="star"></app-hero-can-create>
+        <app-hero-can-create *ngIf="canCreate(hero)" [heroData]="hero" [level]="star" [heroes]="heroes"></app-hero-can-create>
       </div>
     </div>
     &nbsp;

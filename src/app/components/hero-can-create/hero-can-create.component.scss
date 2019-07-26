@@ -5,6 +5,12 @@
 .hero {
   min-width: 105px;
   max-width: 105px;
+  font-weight: bold;
+
+  .fodder & {
+    font-weight: normal;
+    font-style: italic;
+  }
 }
 
 .owned {
