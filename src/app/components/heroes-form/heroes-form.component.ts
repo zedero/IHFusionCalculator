@@ -33,4 +33,8 @@ export class HeroesFormComponent implements OnInit {
     this.ownedService.manualLoad();
   }
 
+  public resetForm() {
+    this.ownedService.clear();
+  }
+
 }

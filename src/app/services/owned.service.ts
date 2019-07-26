@@ -222,7 +222,14 @@ export class OwnedService implements OnDestroy {
         });
       });
     }
+  }
 
+  public clear() {
+    this.ownedHeroes = {};
+    this.tempOwnedHeroes = {};
+    this.ownedHeroesBag = {};
+    this.ownedHeroesRoster = {};
+    this.changed.next();
   }
 
   ngOnDestroy() {

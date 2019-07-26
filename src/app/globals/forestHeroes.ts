@@ -629,6 +629,9 @@ export const FOREST_HEROES = {
       id: 'thale',
       name: 'Thale',
       require: {
+        5: {
+          thale: 1,
+        },
         8: {
           thale: 1,
         },
@@ -638,6 +641,9 @@ export const FOREST_HEROES = {
       id: 'theGreyEyed',
       name: 'The Grey-eyed',
       require: {
+        5: {
+          theGreyEyed: 1,
+        },
         8: {
           theGreyEyed: 1,
         },
@@ -647,6 +653,9 @@ export const FOREST_HEROES = {
       id: 'zekkis',
       name: 'Zekkis',
       require: {
+        5: {
+          zekkis: 1,
+        },
         8: {
           zekkis: 1,
         },
@@ -656,6 +665,9 @@ export const FOREST_HEROES = {
       id: 'demonHunter',
       name: 'Demon Hunter',
       require: {
+        5: {
+          demonHunter: 1,
+        },
         8: {
           demonHunter: 1,
         },
@@ -665,6 +677,9 @@ export const FOREST_HEROES = {
       id: 'dragonSlayer',
       name: 'Dragon Slayer',
       require: {
+        5: {
+          dragonSlayer: 1,
+        },
         8: {
           dragonSlayer: 1,
         },
@@ -674,6 +689,9 @@ export const FOREST_HEROES = {
       id: 'faceless',
       name: 'Faceless',
       require: {
+        5: {
+          faceless: 1,
+        },
         8: {
           faceless: 1,
         },
@@ -683,6 +701,9 @@ export const FOREST_HEROES = {
       id: 'rosa',
       name: 'Rosa',
       require: {
+        5: {
+          rosa: 1,
+        },
         8: {
           rosa: 1,
         },
@@ -692,6 +713,9 @@ export const FOREST_HEROES = {
       id: 'starlight',
       name: 'Starlight',
       require: {
+        5: {
+          starlight: 1,
+        },
         8: {
           starlight: 1,
         },
@@ -701,6 +725,9 @@ export const FOREST_HEROES = {
       id: 'groo',
       name: 'Groo',
       require: {
+        5: {
+          groo: 1,
+        },
         8: {
           groo: 1,
         },
@@ -710,6 +737,9 @@ export const FOREST_HEROES = {
       id: 'eddga',
       name: 'Eddga',
       require: {
+        5: {
+          eddga: 1,
+        },
         8: {
           eddga: 1,
         },
@@ -719,6 +749,9 @@ export const FOREST_HEROES = {
       id: 'vesa',
       name: 'Vesa',
       require: {
+        5: {
+          vesa: 1,
+        },
         8: {
           vesa: 1,
         },
@@ -728,6 +761,9 @@ export const FOREST_HEROES = {
       id: 'malassa',
       name: 'Malassa',
       require: {
+        5: {
+          malassa: 1,
+        },
         8: {
           malassa: 1,
         },
@@ -737,6 +773,9 @@ export const FOREST_HEROES = {
       id: 'heartWatcher',
       name: 'Heart Watcher',
       require: {
+        5: {
+          heartWatcher: 1,
+        },
         8: {
           heartWatcher: 1,
         },
@@ -746,6 +785,9 @@ export const FOREST_HEROES = {
       id: 'valkyrie',
       name: 'Valkyrie',
       require: {
+        5: {
+          valkyrie: 1,
+        },
         8: {
           valkyrie: 1,
         },
