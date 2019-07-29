@@ -271,7 +271,26 @@ export class OwnedService implements OnDestroy {
   }
 
   public clear(faction) {
-    console.log('CLEAR CERTAIN FACTION ONLY');
+    this.deleteFactionFromObject(this.ownedHeroes, faction);
+    this.deleteFactionFromObject(this.tempOwnedHeroes, faction);
+    this.deleteFactionFromObject(this.ownedHeroesBag, faction);
+    this.deleteFactionFromObject(this.ownedHeroesRoster, faction);
+    this.changed.next();
+  }
+
+  private deleteFactionFromObject(object, faction) {
+    Object.entries(object).forEach((objectData) => {
+      const stars = objectData[0];
+      const data = objectData[1];
+      Object.keys(data).forEach(hero => {
+        if (this.heroesPerFaction[faction].has(hero)) {
+          delete object[stars][hero];
+        }
+      });
+    });
+  }
+
+  public clearAll() {
     this.ownedHeroes = {};
     this.tempOwnedHeroes = {};
     this.ownedHeroesBag = {};
