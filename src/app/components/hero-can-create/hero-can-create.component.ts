@@ -11,16 +11,20 @@ import { Helper } from '../../utilities/helper';
 export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
   public hero;
+  public faction;
   public stars;
   public isFodder = false;
   public fusable = 0;
   public owned = 0;
+
+  public ownedServiceChangeSubscription;
 
   private helper = new Helper();
 
   @Input()
   set heroData(data) {
     this.hero = data;
+    this.faction = this.ownedService.getFactionFromHeroId(this.hero.id);
   }
 
   @Input()
@@ -36,7 +40,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
   constructor(private ownedService: OwnedService) { }
 
   ngOnInit() {
-    this.ownedService.changed.subscribe(() => {
+    this.ownedServiceChangeSubscription =  this.ownedService.changed.subscribe(() => {
       this.calculateWhatCanBeFused();
     });
     setTimeout(() => {
@@ -59,7 +63,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
           // @ts-ignore
           const fodderFusable = Math.floor(
             // @ts-ignore
-            (this.ownedService.calculateTotalFodder(fodder[0]) + this.ownedService.ownedOffset[fodder[0]]) / fodder[1]
+            (this.ownedService.calculateTotalFodder(fodder[0], this.faction) + this.ownedService.ownedOffset[fodder[0]]) / fodder[1]
           );
           list.push(fodderFusable);
         });
@@ -122,7 +126,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.ownedService.changed.unsubscribe();
+    this.ownedServiceChangeSubscription.unsubscribe();
   }
 
 }

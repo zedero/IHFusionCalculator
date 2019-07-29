@@ -9,12 +9,18 @@ import { OwnedService } from '../../services/owned.service';
 export class HeroesFormComponent implements OnInit {
 
   public heroes;
+  public FACTION;
   public stars = [3, 4, 5, 6, 7, 8, 9];
   public fusionStars = [5, 6, 7, 8, 9];
 
   @Input()
   set listHeroes(heroList) {
     this.heroes = heroList;
+  }
+
+  @Input()
+  set faction(faction) {
+    this.FACTION = faction;
   }
 
   constructor(private ownedService: OwnedService) { }
@@ -34,7 +40,7 @@ export class HeroesFormComponent implements OnInit {
   }
 
   public resetForm() {
-    this.ownedService.clear();
+    this.ownedService.clear(this.FACTION);
   }
 
 }

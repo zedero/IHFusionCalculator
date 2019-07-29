@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as Constants from './globals/Constants';
+import { OwnedService } from './services/owned.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,50 @@ import * as Constants from './globals/Constants';
 export class AppComponent {
 
   public FOREST = Constants.FOREST_HEROES;
+  public FOREST_ID = 'forest';
   public DARK = Constants.DARK_HEROES;
+  public DARK_ID = 'dark';
+  public LIGHT = Constants.LIGHT_HEROES;
+  public LIGHT_ID = 'light';
 
-  constructor() {
+  public factionList = [
+    {
+      value: this.FOREST_ID,
+      text: 'Forest',
+      selected: true,
+    },
+    {
+      value: this.DARK_ID,
+      text: 'Dark',
+    },
+    {
+      value: this.LIGHT_ID,
+      text: 'Light',
+    },
+  ];
 
+  public activeFaction;
+
+  constructor(private ownedService: OwnedService) {
+    const whatIsSelectedList = this.factionList.filter((obj: any) => {
+      return obj.hasOwnProperty('selected') && obj.selected;
+    });
+    this.activeFaction = whatIsSelectedList[whatIsSelectedList.length - 1].value;
+  }
+
+  public selectFaction(evt) {
+    this.activeFaction = evt.target.value;
+  }
+
+  public isActive(faction) {
+    return faction === this.activeFaction;
+  }
+
+  public manualSave() {
+    this.ownedService.manualSave();
+  }
+  public manualLoad() {
+    this.ownedService.manualLoad();
   }
 
 }

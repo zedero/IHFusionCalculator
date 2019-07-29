@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { OwnedService } from '../../services/owned.service';
 
 @Component({
@@ -6,14 +6,17 @@ import { OwnedService } from '../../services/owned.service';
   templateUrl: './hero-input.component.html',
   styleUrls: ['./hero-input.component.scss']
 })
-export class HeroInputComponent implements AfterViewInit  {
+export class HeroInputComponent implements AfterViewInit, OnDestroy  {
 
   public hero;
   public stars;
+  public faction;
 
   public bagAmount = 0;
   public rosterAmount = 0;
   public total = 0;
+
+  public ownedServiceChangeSubscription;
 
   @ViewChild('bag', {static: false})
   public bagInputElement: any;
@@ -24,6 +27,7 @@ export class HeroInputComponent implements AfterViewInit  {
   @Input()
   set heroData(data) {
     this.hero = data;
+    this.faction = this.ownedService.getFactionFromHeroId(this.hero.id);
   }
 
   @Input()
@@ -42,7 +46,7 @@ export class HeroInputComponent implements AfterViewInit  {
       this.total = this.bagAmount + this.rosterAmount;
     }, 1);
 
-    this.ownedService.changed.subscribe(() => {
+    this.ownedServiceChangeSubscription = this.ownedService.changed.subscribe(() => {
       this.setTotal();
     });
   }
@@ -78,5 +82,8 @@ export class HeroInputComponent implements AfterViewInit  {
     this.total = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
   }
 
+  public ngOnDestroy() {
+    this.ownedServiceChangeSubscription.unsubscribe();
+  }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Helper } from '../utilities/helper';
+import * as Constants from '../globals/Constants';
 
 declare const window: any;
 
@@ -31,12 +32,42 @@ export class OwnedService implements OnDestroy {
 
   public usedHeroes;
 
+  private heroesPerFaction = {};
+
   constructor() {
     this.changed = new Subject();
     this.resetOwnedOffset();
     this.load();
 
+    this.generateHeroesPerFaction();
+
     window.Game = this;
+  }
+
+  public generateHeroesPerFaction() {
+    const generate = (faction, data) => {
+      const heroes = new Set();
+      Object.keys(data).forEach((stars) => {
+        Object.values(data[stars]).forEach((hero: any) => {
+          heroes.add(hero.id);
+        });
+      });
+      this.heroesPerFaction[faction] = heroes;
+    };
+    generate('forest', Constants.FOREST_HEROES);
+    generate('dark', Constants.DARK_HEROES);
+    generate('light', Constants.LIGHT_HEROES);
+  }
+
+  public getFactionFromHeroId(id) {
+    let faction;
+    Object.entries(this.heroesPerFaction).forEach((data: any) => {
+      const factionData: Set<any> = data[1];
+      if (factionData.has(id)) {
+        faction = data[0];
+      }
+    });
+    return faction;
   }
 
   public resetOwnedOffset() {
@@ -170,15 +201,30 @@ export class OwnedService implements OnDestroy {
     this.changed.next();
   }
 
-  public calculateTotalFodder(stars) {
+  public calculateTotalFodder(stars, faction) {
     if (!stars) {
+      return 0;
+    }
+    if (!faction) {
       return 0;
     }
     if (!this.tempOwnedHeroes || !this.tempOwnedHeroes[stars]) {
       return 0;
     }
 
-    return Object.values(this.tempOwnedHeroes[stars]).reduce((a: number, b: number) => a + b, 0);
+    const temp = this.helper.deepCopyObject(this.tempOwnedHeroes[stars]);
+    let amount = 0;
+
+    Object.keys(temp).forEach((hero) => {
+      if (this.heroesPerFaction[faction].has(hero)) {
+        amount += temp[hero];
+      }
+    });
+
+    return amount;
+
+
+    // return Object.values(this.tempOwnedHeroes[stars]).reduce((a: number, b: number) => a + b, 0);
   }
 
   public log(requirement, fodder, fused) {
@@ -224,7 +270,8 @@ export class OwnedService implements OnDestroy {
     }
   }
 
-  public clear() {
+  public clear(faction) {
+    console.log('CLEAR CERTAIN FACTION ONLY');
     this.ownedHeroes = {};
     this.tempOwnedHeroes = {};
     this.ownedHeroesBag = {};
