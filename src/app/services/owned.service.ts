@@ -57,6 +57,7 @@ export class OwnedService implements OnDestroy {
     generate('forest', Constants.FOREST_HEROES);
     generate('dark', Constants.DARK_HEROES);
     generate('light', Constants.LIGHT_HEROES);
+    generate('fortress', Constants.FORTRESS_HEROES);
   }
 
   public getFactionFromHeroId(id) {
@@ -216,6 +217,10 @@ export class OwnedService implements OnDestroy {
     let amount = 0;
 
     Object.keys(temp).forEach((hero) => {
+      if (!this.heroesPerFaction[faction]) {
+        console.warn('Faction not generated');
+        return 0;
+      }
       if (this.heroesPerFaction[faction].has(hero)) {
         amount += temp[hero];
       }

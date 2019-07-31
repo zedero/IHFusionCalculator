@@ -15,6 +15,8 @@ export class AppComponent {
   public DARK_ID = 'dark';
   public LIGHT = Constants.LIGHT_HEROES;
   public LIGHT_ID = 'light';
+  public FORTRESS = Constants.FORTRESS_HEROES;
+  public FORTRESS_ID = 'fortress';
 
   public factionList = [
     {
@@ -23,12 +25,17 @@ export class AppComponent {
       selected: true,
     },
     {
-      value: this.DARK_ID,
-      text: 'Dark',
+      value: this.FORTRESS_ID,
+      text: 'Fortress',
+      selected: true,
     },
     {
       value: this.LIGHT_ID,
       text: 'Light',
+    },
+    {
+      value: this.DARK_ID,
+      text: 'Dark',
     },
   ];
 

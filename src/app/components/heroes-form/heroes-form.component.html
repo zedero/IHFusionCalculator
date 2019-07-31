@@ -2,7 +2,10 @@
   <div class="col-xs-12 col-sm-7">
     <div *ngFor="let star of stars">
           <app-list-header></app-list-header>
-          {{star}}* ({{ownedService.calculateTotalFodder(star, FACTION) + ownedService.ownedOffset[star] }})
+          <div class="list-header">
+            <div class="list-header__stars">{{star}}*</div>
+            <div class="list-header__total">({{ownedService.calculateTotalFodder(star, FACTION) + ownedService.ownedOffset[star] }})</div>
+          </div>
           <div *ngFor="let hero of heroes[star]">
             <app-hero-input [heroData]="hero" [level]="star"></app-hero-input>
           </div>
