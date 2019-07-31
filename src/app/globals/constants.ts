@@ -3,6 +3,8 @@ import * as FOREST from './herodata/forestHeroes';
 import * as DARK from './herodata/darkHeroes';
 import * as LIGHT from './herodata/lightHeroes';
 import * as FORTRESS from './herodata/fortressHeroes';
+import * as SHADOW from './herodata/shadowHeroes';
+import * as ABYSS from './herodata/abyssHeroes';
 
 /**
  * Level 5:  4 copy(4*) + 4 Other(3*)  4 Fodder(4*)
@@ -85,7 +87,7 @@ export const TOTAL_HERO_REQUIREMENT = {
 
 export const FOREST_HEROES = FOREST.FOREST_HEROES;
 export const FORTRESS_HEROES = FORTRESS.FORTRESS_HEROES;
-export const SHADOW_HEROES = {};
-export const ABYSS_HEROES = {};
+export const SHADOW_HEROES = SHADOW.SHADOW_HEROES;
+export const ABYSS_HEROES = ABYSS.ABYSS_HEROES;
 export const DARK_HEROES = DARK.DARK_HEROES;
 export const LIGHT_HEROES = LIGHT.LIGHT_HEROES;

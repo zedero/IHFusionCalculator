@@ -58,6 +58,8 @@ export class OwnedService implements OnDestroy {
     generate('dark', Constants.DARK_HEROES);
     generate('light', Constants.LIGHT_HEROES);
     generate('fortress', Constants.FORTRESS_HEROES);
+    generate('shadow', Constants.SHADOW_HEROES);
+    generate('abyss', Constants.ABYSS_HEROES);
   }
 
   public getFactionFromHeroId(id) {

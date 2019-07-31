@@ -17,6 +17,10 @@ export class AppComponent {
   public LIGHT_ID = 'light';
   public FORTRESS = Constants.FORTRESS_HEROES;
   public FORTRESS_ID = 'fortress';
+  public SHADOW = Constants.SHADOW_HEROES;
+  public SHADOW_ID = 'shadow';
+  public ABYSS = Constants.ABYSS_HEROES;
+  public ABYSS_ID = 'abyss';
 
   public factionList = [
     {
@@ -27,7 +31,14 @@ export class AppComponent {
     {
       value: this.FORTRESS_ID,
       text: 'Fortress',
-      selected: true,
+    },
+    {
+      value: this.SHADOW_ID,
+      text: 'Shadow',
+    },
+    {
+      value: this.ABYSS_ID,
+      text: 'Abyss',
     },
     {
       value: this.LIGHT_ID,
