@@ -6,3 +6,34 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 1.3rem;
+}
+
+
+button, select {
+  border: 1px solid dimgray;
+  border-radius: .25rem;
+  font-size: inherit;
+  font-family: inherit;
+  background-color: white;
+
+  transition: ease-in-out .1s;
+
+  &:hover {
+    border-color: black;
+  }
+}
+
+button {
+  &:active {
+    background-color: #EDEDED;
+  }
+}

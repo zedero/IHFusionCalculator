@@ -1,7 +1,70 @@
+.app-header,
+.forest,
+.fortress,
+.abyss,
+.shadow,
+.light,
+.dark {
+  display: flex;
+  align-items: center;
+  padding: .5rem 1rem;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+}
+
 select {
-  margin-right: 50px;
+  margin-right: 5rem;
+  height: 2rem;
 }
 
 button {
-  margin-right: 10px;
+  margin-right: 1rem;
+  height: 2rem;
+}
+
+.faction-icon {
+  display: inline-block;
+  height: 3rem;
+  width: 3rem;
+
+  vertical-align: top;
+
+  margin-right: .7rem;
+}
+
+.forest {
+  background-color: lighten( lightgreen, 15% );
+}
+
+.fortress {
+  background-color: #84e8ff;
+}
+
+.shadow {
+  background-color: lighten( #00b3a4, 10% );
+}
+
+.abyss {
+  background-color: lighten( #ff907a, 10% );
+}
+
+.light {
+  background-color: #ffff91;
+}
+
+.dark {
+  background-color: lighten( mediumpurple, 25% );
+}
+
+
+.test {
+  color: mediumpurple;
+}
+
+.app-container {
+  margin-top: 4rem;
+  padding: 1rem;
 }

@@ -8,6 +8,7 @@ import { OwnedService } from './services/owned.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private saveActiveFactionName = 'IHCalcActiveFaction';
 
   public FOREST = Constants.FOREST_HEROES;
   public FOREST_ID = 'forest';
@@ -57,10 +58,19 @@ export class AppComponent {
       return obj.hasOwnProperty('selected') && obj.selected;
     });
     this.activeFaction = whatIsSelectedList[whatIsSelectedList.length - 1].value;
+
+    const savedActiveFaction = localStorage.getItem(this.saveActiveFactionName);
+    if (savedActiveFaction) {
+      this.factionList.map((data) => {
+        data.selected = data.value === savedActiveFaction;
+      });
+      this.activeFaction = savedActiveFaction;
+    }
   }
 
   public selectFaction(evt) {
     this.activeFaction = evt.target.value;
+    localStorage.setItem(this.saveActiveFactionName, this.activeFaction);
   }
 
   public isActive(faction) {

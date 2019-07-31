@@ -1,12 +1,16 @@
-<select (change)="selectFaction($event)">
-  <option value="{{faction.value}}" *ngFor="let faction of factionList" [selected]="faction.selected">{{faction.text}}</option>
-</select>
-<button (click)="manualSave()">Manual Save</button>
-<button (click)="manualLoad()">Manual Load</button>
-
-<app-heroes-form [listHeroes]="FOREST" [faction]="FOREST_ID" *ngIf="isActive(FOREST_ID)"></app-heroes-form>
-<app-heroes-form [listHeroes]="DARK" [faction]="DARK_ID" *ngIf="isActive(DARK_ID)"></app-heroes-form>
-<app-heroes-form [listHeroes]="LIGHT" [faction]="LIGHT_ID" *ngIf="isActive(LIGHT_ID)"></app-heroes-form>
-<app-heroes-form [listHeroes]="FORTRESS" [faction]="FORTRESS_ID" *ngIf="isActive(FORTRESS_ID)"></app-heroes-form>
-<app-heroes-form [listHeroes]="SHADOW" [faction]="SHADOW_ID" *ngIf="isActive(SHADOW_ID)"></app-heroes-form>
-<app-heroes-form [listHeroes]="ABYSS" [faction]="ABYSS_ID" *ngIf="isActive(ABYSS_ID)"></app-heroes-form>
+<div class="app-header" [className]="activeFaction">
+  <img src="../assets/{{activeFaction}}.webp" alt="{{activeFaction}}" class="faction-icon">
+  <select (change)="selectFaction($event)">
+    <option value="{{faction.value}}" *ngFor="let faction of factionList" [selected]="faction.selected">{{faction.text}}</option>
+  </select>
+  <button (click)="manualSave()">Manual Save</button>
+  <button (click)="manualLoad()">Manual Load</button>
+</div>
+<div class="app-container">
+  <app-heroes-form [listHeroes]="FOREST" [faction]="FOREST_ID" *ngIf="isActive(FOREST_ID)"></app-heroes-form>
+  <app-heroes-form [listHeroes]="DARK" [faction]="DARK_ID" *ngIf="isActive(DARK_ID)"></app-heroes-form>
+  <app-heroes-form [listHeroes]="LIGHT" [faction]="LIGHT_ID" *ngIf="isActive(LIGHT_ID)"></app-heroes-form>
+  <app-heroes-form [listHeroes]="FORTRESS" [faction]="FORTRESS_ID" *ngIf="isActive(FORTRESS_ID)"></app-heroes-form>
+  <app-heroes-form [listHeroes]="SHADOW" [faction]="SHADOW_ID" *ngIf="isActive(SHADOW_ID)"></app-heroes-form>
+  <app-heroes-form [listHeroes]="ABYSS" [faction]="ABYSS_ID" *ngIf="isActive(ABYSS_ID)"></app-heroes-form>
+</div>
