@@ -4,7 +4,8 @@
 .abyss,
 .shadow,
 .light,
-.dark {
+.dark,
+.info {
   display: flex;
   align-items: center;
   padding: .5rem 1rem;
@@ -57,6 +58,10 @@ button {
 
 .dark {
   background-color: lighten( mediumpurple, 25% );
+}
+
+.info {
+  background-color: azure;
 }
 
 

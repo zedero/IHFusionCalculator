@@ -7,6 +7,7 @@ import { HeroInputComponent } from './components/hero-input/hero-input.component
 import { HeroCanCreateComponent } from './components/hero-can-create/hero-can-create.component';
 import { LogComponent } from './components/log/log.component';
 import { ListHeaderComponent } from './components/list-header/list-header.component';
+import { InfoPageComponent } from './components/info-page/info-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ListHeaderComponent } from './components/list-header/list-header.compon
     HeroInputComponent,
     HeroCanCreateComponent,
     LogComponent,
-    ListHeaderComponent
+    ListHeaderComponent,
+    InfoPageComponent
   ],
   imports: [
     BrowserModule

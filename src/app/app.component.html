@@ -7,6 +7,7 @@
   <button (click)="manualLoad()">Load</button>
 </div>
 <div class="app-container">
+  <app-info-page *ngIf="isActive(INFO_ID)"></app-info-page>
   <app-heroes-form [listHeroes]="FOREST" [faction]="FOREST_ID" *ngIf="isActive(FOREST_ID)"></app-heroes-form>
   <app-heroes-form [listHeroes]="DARK" [faction]="DARK_ID" *ngIf="isActive(DARK_ID)"></app-heroes-form>
   <app-heroes-form [listHeroes]="LIGHT" [faction]="LIGHT_ID" *ngIf="isActive(LIGHT_ID)"></app-heroes-form>

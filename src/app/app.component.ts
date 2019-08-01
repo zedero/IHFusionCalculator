@@ -22,12 +22,17 @@ export class AppComponent {
   public SHADOW_ID = 'shadow';
   public ABYSS = Constants.ABYSS_HEROES;
   public ABYSS_ID = 'abyss';
+  public INFO_ID = 'info';
 
   public factionList = [
     {
+      value: this.INFO_ID,
+      text: 'Home',
+      selected: true,
+    },
+    {
       value: this.FOREST_ID,
       text: 'Forest',
-      selected: true,
     },
     {
       value: this.FORTRESS_ID,
