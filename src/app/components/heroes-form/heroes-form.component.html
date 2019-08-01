@@ -6,8 +6,8 @@
             <div class="list-header__stars">{{star}}*</div>
             <div class="list-header__total">({{ownedService.calculateTotalFodder(star, FACTION) + ownedService.ownedOffset[star] }})</div>
           </div>
-          <div *ngFor="let hero of heroes[star]">
-            <app-hero-input [heroData]="hero" [level]="star"></app-hero-input>
+          <div *ngFor="let hero of heroes[star]; let last = last">
+            <app-hero-input [heroData]="hero" [level]="star" [last]="last"></app-hero-input>
           </div>
     </div>
     <div>

@@ -1,7 +1,7 @@
 <div class="row">
 <!--  {{hero.name}} {{stars}}*-->
   <label for="">{{hero.name}}</label>
-  <input type="text" #bag (keyup)="setBagValue(bag.value)" [disabled]="stars > 5">
-  <input type="text" #roster (keyup)="setRosterValue(roster.value)">
+  <input type="number" #bag (keyup)="setBagValue(bag.value)" [disabled]="stars > 5" [class.last]="lastChild">
+  <input type="number" #roster (keyup)="setRosterValue(roster.value)" [class.last]="lastChild">
   <span class="total">{{total}}</span>
 </div>

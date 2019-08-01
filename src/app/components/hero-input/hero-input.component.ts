@@ -16,6 +16,8 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
   public rosterAmount = 0;
   public total = 0;
 
+  public lastChild = false;
+
   public ownedServiceChangeSubscription;
 
   @ViewChild('bag', {static: false})
@@ -33,6 +35,11 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
   @Input()
   set level(data) {
     this.stars = data;
+  }
+
+  @Input()
+  set last(data) {
+    this.lastChild = data;
   }
 
   constructor(private ownedService: OwnedService) {

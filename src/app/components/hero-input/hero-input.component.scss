@@ -3,18 +3,34 @@
 
 label {
   display: inline-block;
-  min-width: 120px;
-  max-width: 120px;
+  min-width: 110px;
+  max-width: 110px;
+  margin-left: .5rem;
 }
 
 input {
   display: inline-block;
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 80px;
+  max-width: 80px;
   padding-left: 5px;
+
+  border: 1px solid dimgray;
+  border-bottom: none;
+
+  &:nth-child(2) {
+    border-right: none;
+  }
+
+  &.last {
+    border-bottom: 1px solid dimgray;
+  }
 
   &:disabled {
     opacity: 0;
+  }
+
+  &:first-child {
+    margin-left: 2px;
   }
 }
 
