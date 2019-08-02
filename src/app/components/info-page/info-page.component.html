@@ -1,7 +1,38 @@
-<div>
-  <img src="./assets/arrow.svg" alt="" class="arrow arrow-margin">
-  Select a faction here.
-</div>
+<ol class="howto-steps">
+  <li class="howto-steps__item">
+    <div>
+      <img src="./assets/arrow.svg" alt="" class="arrow arrow-margin">
+      Select or change your faction here to start.
+    </div>
+  </li>
+  <li class="howto-steps__item">
+    Enter your owned heroes in the fields.
+    <div class="howto-steps__input-data">
+      <app-hero-input [last]="true" [level]="5" [heroData]="hero" [disable]="true"></app-hero-input>
+    </div>
+  </li>
+  <li class="howto-steps__item">
+    See what heroes can be fused. By clicking the fuse button you can fuse that hero
+    <div class="howto-steps__input-data">
+      <app-hero-can-create [level]="5" [heroData]="heroData" [disable]="true"></app-hero-can-create>
+    </div>
+  </li>
+  <li class="howto-steps__item">
+    See what heroes and fodder was used to fuse your hero of choice.
+
+    <div class="howto-steps__input-data">
+      Fused:<br>
+      Valkyrie 7*<br>
+      <br>
+      Copies:<br>
+      1 x Valkyrie (6*)<br>
+      <br>
+      Fodder:<br>
+      4 x 5*<br>
+    </div>
+  </li>
+</ol>
+
 <p>
   The game automaticly saves entered data. You can also save data that can be loaded at any time.
   <br>

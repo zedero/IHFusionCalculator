@@ -21,6 +21,8 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
   private helper = new Helper();
 
+  public disabled
+
   @Input()
   set heroData(data) {
     this.hero = data;
@@ -35,6 +37,11 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
   @Input()
   set heroes(data) {
     this.isFodder = !data[6].find(x => x.id === this.hero.id);
+  }
+
+  @Input()
+  set disable(data) {
+    this.disabled = data;
   }
 
   constructor(private ownedService: OwnedService) { }
@@ -84,6 +91,9 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
     //   console.log(list);
     // }
     this.fusable = Math.min(...list);
+    if (!isFinite(this.fusable)) {
+      this.fusable = 1;
+    }
     this.owned = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
   }
 

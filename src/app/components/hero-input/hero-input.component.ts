@@ -20,6 +20,8 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
 
   public ownedServiceChangeSubscription;
 
+  public disabled = false;
+
   @ViewChild('bag', {static: false})
   public bagInputElement: any;
 
@@ -35,6 +37,11 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
   @Input()
   set level(data) {
     this.stars = data;
+  }
+
+  @Input()
+  set disable(data) {
+    this.disabled = data;
   }
 
   @Input()

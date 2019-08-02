@@ -1,4 +1,13 @@
+
+:host {
+  display: block;
+}
+
 .row {
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 label {

@@ -7,7 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoPageComponent implements OnInit {
 
-  constructor() { }
+  public hero;
+  public heroData;
+
+  constructor() {
+    this.hero = {name: 'Valkyrie'};
+    this.heroData = {
+      id: 'infoPageHero',
+      name: 'Valkyrie',
+      require: {
+
+      }
+    };
+  }
 
   ngOnInit() {
   }

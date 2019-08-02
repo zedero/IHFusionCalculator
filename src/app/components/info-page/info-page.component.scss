@@ -1,9 +1,21 @@
 .arrow {
   height: 2rem;
   width: 2rem;
-  transform: rotate(-70deg);
+  transform: rotate(-45deg);
 }
 
-.arrow-margin {
-  margin-left: 5rem;
+.howto-steps {
+  margin: 0;
+  padding: 1.5rem;
+}
+
+.howto-steps__item {
+  margin-bottom: 2rem;
+}
+
+.howto-steps__input-data {
+  display: block;
+  margin-top: 1rem;
+  padding: .5rem .5rem;
+  background-color: ghostwhite;
 }

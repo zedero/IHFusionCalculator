@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [class.disabled]="disabled">
 <!--  {{hero.name}} {{stars}}*-->
   <label for="">{{hero.name}}</label>
   <input type="number" #bag (keyup)="setBagValue(bag.value)" [disabled]="stars > 5" [class.last]="lastChild">
