@@ -9,13 +9,13 @@
 }
 
 .form-block-2 {
-  min-width: 80px;
-  max-width: 80px;
+  min-width: 60px;
+  max-width: 60px;
 }
 
 .form-block-3 {
-  min-width: 85px;
-  max-width: 85px;
+  min-width: 65px;
+  max-width: 65px;
 }
 
 .form-block-4 {
@@ -24,5 +24,6 @@
 }
 
 hr {
-  width: 360px;
+  max-width: 360px;
+  width: 27.5rem;
 }

@@ -3,7 +3,7 @@
     <div *ngFor="let star of stars">
           <app-list-header></app-list-header>
           <div class="list-header">
-            <div class="list-header__stars">{{star}}*</div>
+            <div class="list-header__stars">{{star}}★</div>
             <div class="list-header__total">({{ownedService.calculateTotalFodder(star, FACTION) + ownedService.ownedOffset[star] }})</div>
           </div>
           <div *ngFor="let hero of heroes[star]; let last = last">
@@ -21,7 +21,7 @@
 
     <div *ngFor="let star of fusionStars">
       &nbsp;
-      <div>{{star}}*</div>
+      <div>{{star}}★</div>
       <div *ngFor="let hero of heroes[star]">
         <app-hero-can-create *ngIf="canCreate(hero)" [heroData]="hero" [level]="star" [heroes]="heroes"></app-hero-can-create>
       </div>
