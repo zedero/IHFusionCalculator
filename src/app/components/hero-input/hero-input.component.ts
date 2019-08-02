@@ -103,14 +103,4 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
     this.ownedServiceChangeSubscription.unsubscribe();
   }
 
-  public fuse() {
-    // const owned = this.helper.deepCopyObject(this.ownedService.tempOwnedHeroes);
-    // console.log(owned);
-
-    // console.log(this.hero);
-    // console.log(this.stars);
-    // console.log(this.faction);
-    // console.log(this.ownedService.tempOwnedHeroes);
-  }
-
 }
