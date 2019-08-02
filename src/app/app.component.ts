@@ -24,6 +24,8 @@ export class AppComponent {
   public ABYSS_ID = 'abyss';
   public INFO_ID = 'info';
 
+  public aboutOpen = false;
+
   public factionList = [
     {
       value: this.INFO_ID,
@@ -93,4 +95,11 @@ export class AppComponent {
     alert('Made by Zedero (https://github.com/zedero)');
   }
 
+  public openAbout() {
+    this.aboutOpen = true;
+  }
+
+  public closeAbout = () => {
+    this.aboutOpen = false;
+  }
 }

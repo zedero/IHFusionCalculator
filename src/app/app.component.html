@@ -5,7 +5,7 @@
   </select>
   <button (click)="manualSave()">Save</button>
   <button (click)="manualLoad()">Load</button>
-  <button (click)="about()" class="left">i</button>
+  <button (click)="openAbout()" class="left">i</button>
 </div>
 <div class="app-container">
   <app-info-page *ngIf="isActive(INFO_ID)"></app-info-page>
@@ -16,3 +16,4 @@
   <app-heroes-form [listHeroes]="SHADOW" [faction]="SHADOW_ID" *ngIf="isActive(SHADOW_ID)"></app-heroes-form>
   <app-heroes-form [listHeroes]="ABYSS" [faction]="ABYSS_ID" *ngIf="isActive(ABYSS_ID)"></app-heroes-form>
 </div>
+<app-about [close]="closeAbout()" *ngIf="aboutOpen"></app-about>
