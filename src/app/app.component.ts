@@ -27,7 +27,7 @@ export class AppComponent {
   public factionList = [
     {
       value: this.INFO_ID,
-      text: 'Home',
+      text: 'Info',
       selected: true,
     },
     {

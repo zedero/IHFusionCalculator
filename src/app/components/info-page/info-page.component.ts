@@ -9,15 +9,22 @@ export class InfoPageComponent implements OnInit {
 
   public hero;
   public heroData;
+  public heroList;
 
   constructor() {
-    this.hero = {name: 'Valkyrie'};
+    this.hero = {name: 'Valkyrie', id: 'infoPageHero'};
     this.heroData = {
       id: 'infoPageHero',
       name: 'Valkyrie',
-      require: {
-
-      }
+      require: {}
+    };
+    this.heroList = {
+      4: [],
+      6: [
+        {
+          id: 'infoPageHero'
+        }
+      ],
     };
   }
 

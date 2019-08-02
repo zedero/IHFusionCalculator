@@ -19,3 +19,41 @@
   padding: .5rem .5rem;
   background-color: ghostwhite;
 }
+
+
+.hero {
+  min-width: 115px;
+  max-width: 115px;
+  font-weight: bold;
+  color: dimgray;
+
+  &.natural {
+    color: goldenrod;
+  }
+
+  &.fodder {
+    font-weight: normal;
+    font-style: italic;
+    color: black;
+  }
+}
+
+
+ul {
+  margin: 0;
+  padding-left: 1.5rem;
+
+
+}
+
+li {
+  text-align:justify
+}
+
+p {
+  text-align: justify;
+}
+
+.hero-fodder-info {
+  margin: 1.5rem 0;
+}

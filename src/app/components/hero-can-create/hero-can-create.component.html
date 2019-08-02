@@ -1,4 +1,4 @@
-<div *ngIf="fusable > 0" class="hero-create-container" [class.fodder]="isFodder" [class.disabled]="disabled">
+<div *ngIf="fusable > 0" class="hero-create-container" [class.fodder]="isFodder && !isNatural" [class.natural]="isNatural" [class.disabled]="disabled">
   <div class="hero">{{hero.name}}</div>
   <div class="owned">(<small>{{owned}}</small>) +{{fusable}}:</div>
   <div class="fuse"><button (click)="fuseHero()"><small>Fuse</small></button></div>

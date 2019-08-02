@@ -225,6 +225,11 @@ export const ABYSS_HEROES = {
       name: 'Cthugha',
       require: {}
     },
+    {
+      id: 'nakia',
+      name: 'Nakia',
+      require: {}
+    },
   ],
   6: [
     {
@@ -377,6 +382,16 @@ export const ABYSS_HEROES = {
         },
       }
     },
+    {
+      id: 'nakia',
+      name: 'Nakia',
+      require: {
+        5: {
+          nakia: 2,
+          akasha: 1,
+        },
+      }
+    },
   ],
   7: [
     {
@@ -514,6 +529,15 @@ export const ABYSS_HEROES = {
         },
       }
     },
+    {
+      id: 'nakia',
+      name: 'Nakia',
+      require: {
+        6: {
+          nakia: 1,
+        },
+      }
+    },
   ],
   8: [
     {
@@ -648,6 +672,15 @@ export const ABYSS_HEROES = {
       require: {
         7: {
           cthugha: 1,
+        },
+      }
+    },
+    {
+      id: 'nakia',
+      name: 'Nakia',
+      require: {
+        7: {
+          nakia: 1,
         },
       }
     },
@@ -830,6 +863,18 @@ export const ABYSS_HEROES = {
         },
         8: {
           cthugha: 1,
+        },
+      }
+    },
+    {
+      id: 'nakia',
+      name: 'Nakia',
+      require: {
+        5: {
+          nakia: 1,
+        },
+        8: {
+          nakia: 1,
         },
       }
     },

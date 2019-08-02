@@ -14,6 +14,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
   public faction;
   public stars;
   public isFodder = false;
+  public isNatural = false;
   public fusable = 0;
   public owned = 0;
 
@@ -21,7 +22,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
   private helper = new Helper();
 
-  public disabled
+  public disabled;
 
   @Input()
   set heroData(data) {
@@ -36,7 +37,18 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
 
   @Input()
   set heroes(data) {
-    this.isFodder = !data[6].find(x => x.id === this.hero.id);
+    const is4star = !!data[4].find(x => x.id === this.hero.id);
+    const is6star = !!data[6].find(x => x.id === this.hero.id);
+
+    this.isNatural = this.isFodder = false;
+
+    if (!is4star && is6star) {
+      this.isNatural = true;
+    }
+
+    if (is4star && !is6star) {
+      this.isFodder = true;
+    }
   }
 
   @Input()

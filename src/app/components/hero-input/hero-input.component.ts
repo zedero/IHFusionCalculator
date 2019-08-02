@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { OwnedService } from '../../services/owned.service';
+import { Helper } from '../../utilities/helper';
 
 @Component({
   selector: 'app-hero-input',
@@ -21,6 +22,8 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
   public ownedServiceChangeSubscription;
 
   public disabled = false;
+
+  private helper = new Helper();
 
   @ViewChild('bag', {static: false})
   public bagInputElement: any;
@@ -98,6 +101,16 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
 
   public ngOnDestroy() {
     this.ownedServiceChangeSubscription.unsubscribe();
+  }
+
+  public fuse() {
+    // const owned = this.helper.deepCopyObject(this.ownedService.tempOwnedHeroes);
+    // console.log(owned);
+
+    // console.log(this.hero);
+    // console.log(this.stars);
+    // console.log(this.faction);
+    // console.log(this.ownedService.tempOwnedHeroes);
   }
 
 }
