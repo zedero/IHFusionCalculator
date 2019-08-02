@@ -27,6 +27,8 @@ button, select {
 
   transition: ease-in-out .1s;
 
+  cursor: pointer;
+
   &:hover {
     border-color: black;
   }

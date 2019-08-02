@@ -8,6 +8,7 @@ import { HeroCanCreateComponent } from './components/hero-can-create/hero-can-cr
 import { LogComponent } from './components/log/log.component';
 import { ListHeaderComponent } from './components/list-header/list-header.component';
 import { InfoPageComponent } from './components/info-page/info-page.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InfoPageComponent } from './components/info-page/info-page.component';
     HeroCanCreateComponent,
     LogComponent,
     ListHeaderComponent,
-    InfoPageComponent
+    InfoPageComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule

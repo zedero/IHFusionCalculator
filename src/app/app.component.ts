@@ -89,4 +89,8 @@ export class AppComponent {
     this.ownedService.manualLoad();
   }
 
+  public about() {
+    alert('Made by Zedero (https://github.com/zedero)');
+  }
+
 }
