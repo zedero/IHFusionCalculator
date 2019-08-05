@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Helper } from '../utilities/helper';
 import * as Constants from '../globals/Constants';
+import { retry } from 'rxjs/operators';
 
 declare const window: any;
 
@@ -307,6 +308,58 @@ export class OwnedService implements OnDestroy {
 
   ngOnDestroy() {
     this.changed.unsubscribe();
+  }
+
+  public isFusable(id, stars, faction, test = {}) {
+    const total5fodder = this.calculateTotalFodder(5, faction);
+    const requirement = Constants.TOTAL_5STAR_COPY_REQUIREMENT[stars];
+    let required5starHero = '';
+
+    Object.entries(this.get6StarRequirements(id, faction).require[5]).forEach((heroReq) => {
+      if (heroReq[1] === 1) {
+        required5starHero = heroReq[0];
+      }
+    });
+
+
+    if (total5fodder >= requirement.fodder) {
+      if (this.tempOwnedHeroes[5][id] >= 2) {
+        if (required5starHero) {
+          if (this.tempOwnedHeroes[5][required5starHero] >= 1) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  public get6StarRequirements(id, faction): any {
+    const faction6StarData: Array<any> = this.getFactionData(faction)[6];
+    return faction6StarData.find((hero) => {
+      return hero.id === id;
+    });
+  }
+
+  public getFactionData(faction) {
+    switch (faction) {
+      case 'forest':
+        return Constants.FOREST_HEROES;
+      case 'fortress':
+        return Constants.FORTRESS_HEROES;
+      case 'abyss':
+        return Constants.ABYSS_HEROES;
+      case 'shadow':
+        return Constants.SHADOW_HEROES;
+      case 'dark':
+        return Constants.DARK_HEROES;
+      case 'dark':
+        return Constants.DARK_HEROES;
+      case 'light':
+        return Constants.LIGHT_HEROES;
+      default:
+        return undefined;
+    }
   }
 
 }

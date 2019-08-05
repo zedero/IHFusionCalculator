@@ -99,6 +99,13 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
     this.total = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
   }
 
+  public isFusable() {
+    if (this.stars < 6) {
+      return false;
+    }
+    return this.ownedService.isFusable(this.hero.id, this.stars, this.faction);
+  }
+
   public ngOnDestroy() {
     this.ownedServiceChangeSubscription.unsubscribe();
   }

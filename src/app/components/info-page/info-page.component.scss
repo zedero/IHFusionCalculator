@@ -36,6 +36,12 @@
     font-style: italic;
     color: black;
   }
+
+  &.potential {
+    font-weight: normal;
+    color: black;
+    text-decoration: underline;
+  }
 }
 
 

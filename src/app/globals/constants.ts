@@ -85,9 +85,51 @@ export const TOTAL_HERO_REQUIREMENT = {
   },
 };
 
+export const TOTAL_5STAR_COPY_REQUIREMENT = {
+  6: {
+    fodder: 6,
+    copies: 2,
+  },
+  7: {
+    fodder: 10,
+    copies: 2,
+  },
+  8: {
+    fodder: 19,
+    copies: 2,
+  },
+  9: {
+    fodder: 28,
+    copies: 3,
+  },
+  10: {
+    fodder: 64,
+    copies: 5,
+  },
+  11: {
+    fodder: 93,
+    copies: 6,
+  },
+  12: {
+    fodder: 122,
+    copies: 7,
+  },
+  13: {
+    fodder: 186,
+    copies: 7,
+  },
+};
+
 export const FOREST_HEROES = FOREST.FOREST_HEROES;
 export const FORTRESS_HEROES = FORTRESS.FORTRESS_HEROES;
 export const SHADOW_HEROES = SHADOW.SHADOW_HEROES;
 export const ABYSS_HEROES = ABYSS.ABYSS_HEROES;
 export const DARK_HEROES = DARK.DARK_HEROES;
 export const LIGHT_HEROES = LIGHT.LIGHT_HEROES;
+
+// 6  = 2
+// 9  = 1
+// 10 = 2
+// 11 = 1
+// 12 = 1
+
