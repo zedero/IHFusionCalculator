@@ -75,18 +75,28 @@ export class OwnedService implements OnDestroy {
   }
 
   public resetOwnedOffset() {
+    const offset = () => {
+      return this.helper.deepCopyObject({
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0,
+        8: 0,
+        9: 0,
+        10: 0,
+        11: 0,
+        12: 0,
+        13: 0,
+      });
+    };
     this.ownedOffset = {
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-      10: 0,
-      11: 0,
-      12: 0,
-      13: 0,
+      forest: offset(),
+      fortress: offset(),
+      shadow: offset(),
+      abyss: offset(),
+      dark: offset(),
+      light: offset(),
     };
 
     this.usedHeroes = {};
@@ -310,9 +320,111 @@ export class OwnedService implements OnDestroy {
     this.changed.unsubscribe();
   }
 
-  public isFusable(id, stars, faction, test = {}) {
-    const total5fodder = this.calculateTotalFodder(5, faction);
+  public get5StarFusionAmount(faction) {
+    let fused = 0;
+    const owned = this.helper.deepCopyObject(this.tempOwnedHeroes);
+    const owned3star = [];
+    const owned4star = [];
+    let owned3starRemainder = 0;
+    let owned4starRemainder = 0;
+
+    Object.entries(owned[3]).forEach((data: any) => {
+      if (!this.heroesPerFaction[faction].has(data[0])) {return; }
+      if (data[1] / 4 >= 1) {
+        owned3star.push([data[0], Math.floor(data[1] / 4)]);
+        owned3starRemainder += data[1] % 4;
+      }
+    });
+    Object.entries(owned[4]).forEach((data: any) => {
+      if (!this.heroesPerFaction[faction].has(data[0])) {return; }
+      if (data[1] / 4 >= 1) {
+        owned4star.push([data[0], Math.floor(data[1] / 4)]);
+        owned4starRemainder += data[1] % 4;
+      }
+    });
+    const maxFusableWith3Star = owned3star.reduce((a, b) => {
+      return a + b[1];
+    }, 0 );
+
+    const maxFusableWith4Star = owned4star.reduce((a, b) => {
+      return a + b[1];
+    }, 0 );
+
+    const maxPossibleFusable = Math.min(
+      maxFusableWith3Star + Math.floor(owned3starRemainder / 4),
+      Math.floor((maxFusableWith4Star + Math.floor(owned4starRemainder / 4)) / 2),
+    );
+
+    if (maxPossibleFusable === 0) {
+      return 0;
+    }
+
+    owned3star.sort((a, b) => {
+      return a[1] - b[1];
+    }).reverse();
+
+    owned4star.sort((a, b) => {
+      return a[1] - b[1];
+    }).reverse();
+
+    owned4star.forEach((hero, index) => {
+      // @ts-ignore
+      const require = this.getFactionData(faction)[5].find((data: any) => data.id === hero[0]).require;
+      let needed3Hero;
+      // tslint:disable-next-line:forin
+      for (needed3Hero in require[3]) { break; }
+
+      const max3StarIndex = owned3star.findIndex((data: any) => data[0] === needed3Hero);
+      const max3Star = owned3star[max3StarIndex][1];
+      const maxFusable = Math.min(hero[1], max3Star, (maxPossibleFusable - fused));
+
+      fused += maxFusable;
+      owned4star[index][1] -= maxFusable;
+      owned3star[max3StarIndex][1] -= maxFusable;
+
+    });
+
+    return fused;
+  }
+
+  public isFusable(id, stars, faction) {
+    // return false;
+    if (stars === 7 && id === 'amenRa') {
+      this.get5StarFusionAmount(faction);
+    }
+
+
+
+    const total5fodder = this.calculateTotalFodder(5, faction) + this.get5StarFusionAmount(faction);
     const requirement = Constants.TOTAL_5STAR_COPY_REQUIREMENT[stars];
+    let fodderOffset = this.ownedOffset[faction][5];
+    let copiesOffset = 0;
+    let requirement6starFodderOffset = 0;
+
+    if (stars >= 7) {
+      if (this.tempOwnedHeroes[6][id]) {
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].copies;
+        requirement6starFodderOffset = 1;
+      }
+    }
+
+    if (stars >= 8) {
+      if (this.tempOwnedHeroes[7][id]) {
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].copies;
+        requirement6starFodderOffset = 1;
+      }
+    }
+
+    if (stars >= 9) {
+      if (this.tempOwnedHeroes[8][id]) {
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].copies;
+        requirement6starFodderOffset = 1;
+      }
+    }
+
     let required5starHero = '';
 
     Object.entries(this.get6StarRequirements(id, faction).require[5]).forEach((heroReq) => {
@@ -321,11 +433,18 @@ export class OwnedService implements OnDestroy {
       }
     });
 
+    const notUndefined = (val) => {
+      if (!val) {
+        return 0;
+      } else {
+        return val;
+      }
+    };
 
-    if (total5fodder >= requirement.fodder) {
-      if (this.tempOwnedHeroes[5][id] >= 2) {
+    if (total5fodder >= requirement.fodder - fodderOffset) {
+      if (notUndefined(this.tempOwnedHeroes[5][id]) >= requirement.copies - copiesOffset) {
         if (required5starHero) {
-          if (this.tempOwnedHeroes[5][required5starHero] >= 1) {
+          if (notUndefined(this.tempOwnedHeroes[5][required5starHero]) >= 1 - requirement6starFodderOffset) {
             return true;
           }
         }
@@ -351,8 +470,6 @@ export class OwnedService implements OnDestroy {
         return Constants.ABYSS_HEROES;
       case 'shadow':
         return Constants.SHADOW_HEROES;
-      case 'dark':
-        return Constants.DARK_HEROES;
       case 'dark':
         return Constants.DARK_HEROES;
       case 'light':

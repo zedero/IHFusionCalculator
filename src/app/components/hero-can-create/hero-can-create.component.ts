@@ -76,14 +76,17 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
       const requiredHeroes = requirements[1];
       const requiredFodder = Constants.TOTAL_HERO_REQUIREMENT[this.stars];
 
-
+      // if (this.stars === 8 && this.hero.id === 'dominator') {
+      //   debugger;
+      // }
       if (requiredFodder) {
         Object.entries(requiredFodder).forEach((fodder) => {
           // @ts-ignore
           const fodderFusable = Math.floor(
             // @ts-ignore
-            (this.ownedService.calculateTotalFodder(fodder[0], this.faction) + this.ownedService.ownedOffset[fodder[0]]) / fodder[1]
+            (this.ownedService.calculateTotalFodder(fodder[0], this.faction) + this.ownedService.ownedOffset[this.faction][fodder[0]]) / fodder[1]
           );
+
           list.push(fodderFusable);
         });
       }
@@ -98,7 +101,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
     // if (this.hero.id === 'vesa') {
     //   console.log(list);
     // }
-    // if (this.stars === 9 && this.hero.id === 'thale') {
+    // if (this.stars === 8 && this.hero.id === 'dominator') {
     //   console.log(this.hero.require);
     //   console.log(list);
     // }
@@ -127,7 +130,7 @@ export class HeroCanCreateComponent implements OnInit, OnDestroy {
     if (requiredFodder) {
       Object.entries(requiredFodder).forEach((fodder) => {
         // @ts-ignore
-        this.ownedService.ownedOffset[fodder[0]] -= fodder[1];
+        this.ownedService.ownedOffset[this.faction][fodder[0]] -= fodder[1];
       });
     }
 
