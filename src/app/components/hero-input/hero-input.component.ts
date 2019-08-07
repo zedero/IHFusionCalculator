@@ -25,6 +25,8 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
 
   private helper = new Helper();
 
+  public isFusable = false;
+
   @ViewChild('bag', {static: false})
   public bagInputElement: any;
 
@@ -64,6 +66,7 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
     }, 1);
 
     this.ownedServiceChangeSubscription = this.ownedService.changed.subscribe(() => {
+      this.setIsFusable();
       this.setTotal();
     });
   }
@@ -99,11 +102,11 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
     this.total = this.ownedService.getTempHeroAmount(this.hero.id, this.stars);
   }
 
-  public isFusable() {
+  public setIsFusable() {
     if (this.stars < 6) {
       return false;
     }
-    return this.ownedService.isFusable(this.hero.id, this.stars, this.faction);
+    this.isFusable =  this.ownedService.isFusable(this.hero.id, this.stars, this.faction);
   }
 
   public ngOnDestroy() {

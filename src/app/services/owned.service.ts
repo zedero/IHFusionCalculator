@@ -375,13 +375,17 @@ export class OwnedService implements OnDestroy {
       for (needed3Hero in require[3]) { break; }
 
       const max3StarIndex = owned3star.findIndex((data: any) => data[0] === needed3Hero);
-      const max3Star = owned3star[max3StarIndex][1];
+      let max3Star = 0;
+      if (max3StarIndex !== -1) {
+        max3Star = owned3star[max3StarIndex][1];
+      }
       const maxFusable = Math.min(hero[1], max3Star, (maxPossibleFusable - fused));
 
       fused += maxFusable;
       owned4star[index][1] -= maxFusable;
-      owned3star[max3StarIndex][1] -= maxFusable;
-
+      if (max3StarIndex !== -1) {
+        owned3star[max3StarIndex][1] -= maxFusable;
+      }
     });
 
     return fused;
@@ -407,8 +411,6 @@ export class OwnedService implements OnDestroy {
     // if (stars === 7 && id === 'sigmund') {
     //   this.get5StarFusionAmount(faction);
     // }
-
-
 
     const total5fodder = this.calculateTotalFodder(5, faction) + this.get5StarFusionAmount(faction);
     const requirement = Constants.TOTAL_5STAR_COPY_REQUIREMENT[stars];
