@@ -387,11 +387,26 @@ export class OwnedService implements OnDestroy {
     return fused;
   }
 
+  public getAmountOfHeroesByStar(exclude, stars, faction) {
+    let total = 0;
+    Object.entries(this.tempOwnedHeroes[stars]).forEach((heroData: any) => {
+      const id = heroData[0];
+      const amount = heroData[1];
+      if (id !== exclude && this.heroesPerFaction[faction].has(id)) {
+        if (amount === undefined) {
+
+        }
+        total += amount;
+      }
+    });
+    return total;
+  }
+
   public isFusable(id, stars, faction) {
     // return false;
-    if (stars === 7 && id === 'amenRa') {
-      this.get5StarFusionAmount(faction);
-    }
+    // if (stars === 7 && id === 'sigmund') {
+    //   this.get5StarFusionAmount(faction);
+    // }
 
 
 
@@ -401,7 +416,9 @@ export class OwnedService implements OnDestroy {
     let copiesOffset = 0;
     let requirement6starFodderOffset = 0;
 
+
     if (stars >= 7) {
+      // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[6][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].fodder;
         copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].copies;
@@ -410,6 +427,7 @@ export class OwnedService implements OnDestroy {
     }
 
     if (stars >= 8) {
+      // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[7][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].fodder;
         copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].copies;
@@ -418,6 +436,8 @@ export class OwnedService implements OnDestroy {
     }
 
     if (stars >= 9) {
+      // console.log(this.getAmountOfHeroesByStar(id, 6, faction));
+      // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[8][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].fodder;
         copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].copies;
@@ -425,6 +445,9 @@ export class OwnedService implements OnDestroy {
       }
     }
 
+    // if (stars === 9 && id === 'sigmund') {
+    //   console.log(total5fodder, requirement.fodder , fodderOffset);
+    // }
     let required5starHero = '';
 
     Object.entries(this.get6StarRequirements(id, faction).require[5]).forEach((heroReq) => {
