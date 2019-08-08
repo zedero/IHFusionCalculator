@@ -63,6 +63,7 @@ export class HeroInputComponent implements AfterViewInit, OnDestroy  {
       this.bagInputElement.nativeElement.value = this.bagAmount = this.ownedService.getHeroBagAmount(this.hero.id, this.stars);
       this.rosterInputElement.nativeElement.value = this.rosterAmount = this.ownedService.getHeroRosterAmount(this.hero.id, this.stars);
       this.total = this.bagAmount + this.rosterAmount;
+      this.setIsFusable();
     }, 1);
 
     this.ownedServiceChangeSubscription = this.ownedService.changed.subscribe(() => {

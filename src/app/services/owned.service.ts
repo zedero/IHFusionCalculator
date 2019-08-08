@@ -408,7 +408,7 @@ export class OwnedService implements OnDestroy {
 
   public isFusable(id, stars, faction) {
     // return false;
-    // if (stars === 7 && id === 'sigmund') {
+    // if (stars === 7 && id === 'amenRa') {
     //   this.get5StarFusionAmount(faction);
     // }
 
@@ -419,7 +419,8 @@ export class OwnedService implements OnDestroy {
     let requirement6starFodderOffset = 0;
 
 
-    if (stars >= 7) {
+
+    if (stars === 7) {
       // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[6][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].fodder;
@@ -428,22 +429,57 @@ export class OwnedService implements OnDestroy {
       }
     }
 
-    if (stars >= 8) {
+    // TODO: Add possible other heroes that can be used in the fusion for the cost prediction
+    if (stars === 8) {
+      const copiesOther6 = this.getAmountOfHeroesByStar(id, 6, faction);
+      const copiesHero6 = this.getAmountOfHeroesByStar('', 6, faction) - copiesOther6;
+
       // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[7][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].fodder;
         copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].copies;
         requirement6starFodderOffset = 1;
+      } else if (copiesHero6 > 0) {
+        // check if you own the hero before that step
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].copies;
+        requirement6starFodderOffset = 1;
       }
+
+      // check 6* fodder requirement
+      if (copiesOther6 > 0) {
+        fodderOffset += 6;
+      }
+
     }
 
-    if (stars >= 9) {
-      // console.log(this.getAmountOfHeroesByStar(id, 6, faction));
+    if (stars === 9) {
+      const copiesOther6 = this.getAmountOfHeroesByStar(id, 6, faction);
+      const copiesHero6 = this.getAmountOfHeroesByStar('', 6, faction) - copiesOther6;
+
+      const copiesOther7 = this.getAmountOfHeroesByStar(id, 7, faction);
+      const copiesHero7 = this.getAmountOfHeroesByStar('', 7, faction) - copiesOther7;
+
       // check if you already own the hero of the prev step
       if (this.tempOwnedHeroes[8][id]) {
         fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].fodder;
         copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[8].copies;
         requirement6starFodderOffset = 1;
+      } else if (copiesHero7 > 0) {
+        // check if you own the hero before that step
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[7].copies;
+        requirement6starFodderOffset = 1;
+      } else if (copiesHero6 > 0) {
+        // check if you own the hero before that step
+        fodderOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].fodder;
+        copiesOffset += Constants.TOTAL_5STAR_COPY_REQUIREMENT[6].copies;
+        requirement6starFodderOffset = 1;
+      }
+
+      // check 6* fodder requirement
+      if (copiesOther6 > 0) {
+        fodderOffset += 6;
       }
     }
 
